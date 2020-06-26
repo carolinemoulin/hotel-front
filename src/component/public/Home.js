@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import Header from '../common/Header';
 
 class Home extends Component {
   state = {  }
   render() {
     return (
-      <h1>FCC</h1>
+      <div>
+        <Header path="/"/>
+        <h1>FCC</h1>
+      </div>
     );
   }
 }
