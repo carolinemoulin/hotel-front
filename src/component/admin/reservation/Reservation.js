@@ -31,9 +31,16 @@ class Reservation extends Component {
     this.setState(copy_state);
   };
 
-  componentDidMount = () => {
+  componentDidMount = async() => {
+    try {
+      const data = await this.fd.getReservations(); // il faut obligatoirement que getReservations retourne une promesse
+      this.successReservation(data);
+    } catch (error) {
+      this.failedReservation(error);
+    }
     // Tentative de récupération des données
-    this.fd.getReservations(this.successReservation, this.failedReservation);
+    // this.fd.getReservations(this.successReservation, this.failedReservation);
+    // Utilisation du asynch et await
   };
 
   render() {
