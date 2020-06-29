@@ -6,17 +6,17 @@
 
 
 
-$or: #c2a365;
+$violet: #704CB6;
 
 
-$theme-colors: (primary: $or, );
+$theme-colors: (primary: $violet, );
 
 
 
 @import "./../../../node_modules/bootstrap/scss/bootstrap";
 
 body {
-    color: #535046;
+    color: #B7BBBE;
 }
 
 img {

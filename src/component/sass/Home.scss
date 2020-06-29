@@ -1,3 +1,35 @@
+/*Custom scss */
+
+/*Import*/
+@import "./../../../node_modules/bootstrap/scss/functions";
+@import "./../../../node_modules/bootstrap/scss/variables";
+
+
+
+$violet: #704CB6;
+
+
+$theme-colors: (primary: $violet );
+
+
+
+@import "./../../../node_modules/bootstrap/scss/bootstrap";
+
+body {
+    color: #B7BBBE;
+}
+
+img {
+    width: 60%
+}
+
+a,
+a:hover,
+a:visited,
+a:focus {
+    text-decoration: none !important
+}
+
 .App {
   background-color: #B7BBBE;
 }

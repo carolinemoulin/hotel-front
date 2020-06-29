@@ -24,6 +24,39 @@ class FetchData {
         return data;
       });
   };
+
+  postReservation = ({start, end, persons, category}) => { //destructuring
+    return fetch(`${this.url}admin/booking/try-booking?
+    start=${start}&end=${end}&persons=${persons}$category${category}`, {
+      credentials: this.credentials,
+      method: "POST",
+      // headers: this.headers
+      body: JSON.stringify({
+        "customer": {
+          "firstName": "string",
+          "lastName": "string",
+          "phone": "string",
+          "email": "string",
+          "address": {
+            "street": "string",
+            "zipcode": "string",
+            "city": "string",
+            "country": "string"
+          }
+        }
+      })
+    })
+      .then(function (response) {
+        if (response.status !== 2011) {
+          throw new Error("Erreur : " + response.status);
+        }
+        return response.json(); // teste si c'est bien du json
+      })
+      .then(function (data) {
+        console.log("data : ", data); // j'ai ma donnée au format json
+        return data;
+      });
+  };
 }
 
 export default FetchData;
