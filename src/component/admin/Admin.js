@@ -13,7 +13,7 @@ class Admin extends Component {
   isSelected = (path) => {
     const urlPath = this.props.location.pathname;
     console.log('path:', urlPath);
-    return (path === urlPath) ? "btn-whatever" : "btn-secondary";
+    return (path === urlPath) ? "btn-primary" : "btn-secondary";
   }
   
   render() {

@@ -16,7 +16,7 @@ $theme-colors: (primary: $violet );
 @import "./../../../node_modules/bootstrap/scss/bootstrap";
 
 body {
-    color: #B7BBBE;
+    background-color: #B7BBBE;
 }
 
 img {
@@ -28,12 +28,4 @@ a:hover,
 a:visited,
 a:focus {
     text-decoration: none !important
-}
-
-.App {
-  background-color: #B7BBBE;
-}
-
-.btn-whatever {
-  background-color: #704CB6 !important;
 }

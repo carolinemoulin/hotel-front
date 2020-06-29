@@ -4,7 +4,7 @@ import './../css/Admin.css';
 
 const Header = (props) => {
   const isSelected = (path) => {
-    return (path === props.path) ? "btn-whatever" : "btn-secondary";
+    return (path === props.path) ? "btn-primary" : "btn-secondary";
   }
 
   return (

@@ -7815,7 +7815,7 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6; } }
 body {
-  color: #B7BBBE; }
+  background-color: #B7BBBE; }
 
 img {
   width: 60%; }
@@ -7825,11 +7825,5 @@ a:hover,
 a:visited,
 a:focus {
   text-decoration: none !important; }
-
-.App {
-  background-color: #B7BBBE; }
-
-.btn-whatever {
-  background-color: #704CB6 !important; }
 
 /*# sourceMappingURL=Admin.css.map */
