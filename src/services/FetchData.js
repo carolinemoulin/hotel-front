@@ -1,10 +1,10 @@
 class FetchData {
   constructor() {
     this.url = 'http://localhost:8000/';
-    this.headers = {
-      "Content-Type": "application/json",
-      Authorization: "Basic " + btoa("admin:admin") // btoa = encodage en base 64
-    };
+    // this.headers = {
+    //   "Content-Type": "application/json",
+    //   Authorization: "Basic " + btoa("admin:admin") // btoa = encodage en base 64
+    // };
     this.credentials = "same-origin";
   }
   getReservations = () => {
@@ -47,6 +47,42 @@ class FetchData {
       })
     }).then(function (response) {
       if (response.status !== 201) {
+        throw new Error("Erreur " + response.status);
+      }
+      return response.json();// teste si c'est bien du json
+    })
+      .then(function (data) {
+        console.log('data : ', data);// J'ai ma donnée au format json
+        return data;
+      });
+  }
+
+  // deleteReservation = (code) => {
+  //   return fetch(`${this.url}booking/${code}`, {
+  //     credentials: this.credentials,
+  //     method: "DELETE",
+  //     headers: this.headers
+  //   }).then(function (response) {
+  //     if (response.status !== 200) {
+  //       throw new Error("Erreur " + response.status);
+  //     }
+  //     return response.json();// teste si c'est bien du json
+  //   })
+  //     .then(function (data) {
+  //       console.log('data : ', data);// J'ai ma donnée au format json
+  //       return data;
+  //     });
+
+  // }
+  deleteReservation = (code) => {
+    console.log('Dans deleteReservation, ', code);
+    return fetch(`${this.url}booking/${code}`, {
+      method: "DELETE",
+      headers: this.headers
+    }
+    ).then(function (response) {
+      if (response.status !== 200) {
+        console.log('response en cas d\'erreur du serveur : ', response);
         throw new Error("Erreur " + response.status);
       }
       return response.json();// teste si c'est bien du json
