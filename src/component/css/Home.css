@@ -7817,13 +7817,20 @@ a.text-dark:hover, a.text-dark:focus {
 body {
   background-color: #B7BBBE; }
 
-img {
+header img {
   width: 60%; }
+
+img {
+  width: 100%; }
 
 a,
 a:hover,
 a:visited,
 a:focus {
   text-decoration: none !important; }
+
+.headband {
+  background: url(/IMG_0801.jpg);
+  width: 100%; }
 
 /*# sourceMappingURL=Home.css.map */
