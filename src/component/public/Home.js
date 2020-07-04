@@ -18,39 +18,62 @@ class Home extends Component {
     this.state = {
       reservation: null,
       error: null,
+      errorReservation: false,
+      errorAvailable: false,
+      errorCancel: false
     };
     this.fd = new FetchData();
+    this.payload_reservation = {}
   }
 
   handleSearchAvailable = async (event) => {
     console.log("Dans searchAvailable");
     event.preventDefault();
 
-    const payload_available = {
+    this.payload_reservation = {
       start: event.target.querySelector("#start-date").value,
       end: event.target.querySelector("#end-date").value,
       persons: event.target.querySelector("#nb-person").value,
     };
-    console.log("request : ", payload_available);
+
+    this.fd.getAvailable(this.payload_reservation)
+      .then(data => {
+        this.successAvailable(data)
+      })
+      .catch(error => {
+        this.failAvailable(error)
+      })
 
     // Test des entrées
 
     //GET
-    try {
-      const available = await this.fd.getAvailable(payload_available);
-      console.log("available :", available);
-      // copie du state
-      const copy_state = { ...this.state };
-      // modification de la copie du state
-      copy_state.available = available;
-      // sauvegarde du state
-      this.setState(copy_state);
-    } catch (error) {
-      console.log("Erreur : ", error);
-    }
+    // try {
+    //   const available = await this.fd.getAvailable(payload_available);
+    //   console.log("available :", available);
+    //   // copie du state
+    //   const copy_state = { ...this.state };
+    //   // modification de la copie du state
+    //   copy_state.available = available;
+    //   // sauvegarde du state
+    //   this.setState(copy_state);
+    // } catch (error) {
+    //   console.log("Erreur : ", error);
+    // }
 
     //Validation de la réservation
   };
+  successAvailable = (data) => {
+    const copy_state = { ...this.state };
+    copy_state.reservationsAvailable = data.list;
+    this.setState(copy_state);
+  }
+
+  failAvailable = (error) => {
+    const copy_state = { ...this.state };
+    copy_state.errorAvailable = error;
+    this.setState(copy_state);
+    console.log("Erreur", error);
+  }
 
   handleSubmit = async (event) => {
     console.log("Dans handleSubmit");
