@@ -44,22 +44,6 @@ class Home extends Component {
         this.failAvailable(error)
       })
 
-    // Test des entrées
-
-    //GET
-    // try {
-    //   const available = await this.fd.getAvailable(payload_available);
-    //   console.log("available :", available);
-    //   // copie du state
-    //   const copy_state = { ...this.state };
-    //   // modification de la copie du state
-    //   copy_state.available = available;
-    //   // sauvegarde du state
-    //   this.setState(copy_state);
-    // } catch (error) {
-    //   console.log("Erreur : ", error);
-    // }
-
     //Validation de la réservation
   };
   successAvailable = (data) => {
@@ -75,34 +59,31 @@ class Home extends Component {
     console.log("Erreur", error);
   }
 
-  handleSubmit = async (event) => {
-    console.log("Dans handleSubmit");
-    event.preventDefault();
-
-    const payload_reservation = {
-      start: event.target.querySelector("#start-date").value,
-      end: event.target.querySelector("#end-date").value,
-      persons: event.target.querySelector("#nb-person").value,
-      category: event.target.querySelector("#category").value,
-    };
-    console.log("request : ", payload_reservation);
-
-    // Test des entrées
-
-    //POST
-    try {
-      const reservation = await this.fd.postReservation(payload_reservation);
-      console.log("reservation :", reservation);
-      // copie du state
-      const copy_state = { ...this.state };
-      // modification de la copie du state
-      copy_state.reservation = reservation;
-      // sauvegarde du state
-      this.setState(copy_state);
-    } catch (error) {
-      console.log("Erreur : ", error);
+  handleSubmitReservation = (categoryId) => {
+    this.payload_reservation.category = categoryId;
+    console.log(this.payload_reservation)
+    this.fd.postReservation(this.payload_reservation)
+      .then(data => {
+        this.successReservation(data)
+      })
+      .catch(error => {
+        this.failReservation(error)
+      }) 
     }
 
+    successReservation = (data) => {
+      const copy_state = { ...this.state };
+      if (!copy_state.reservations) copy_state.reservations = [];
+      copy_state.reservations.push(data);
+      this.setState(copy_state);
+  
+      this.fd.getAvailable(this.payload_reservation)
+        .then(data => {
+          this.successAvailable(data)
+        })
+        .catch(error => {
+          this.failAvailable(error)
+        })    
     //Validation de la réservation
   };
   deleteReservation = async (e) => {
@@ -312,7 +293,7 @@ class Home extends Component {
                             <button
                               className="btn btn-danger"
                               onClick={() =>
-                                this.cancelReservation(reservation.code)
+                                this.deleteReservation(reservation.code)
                               }
                             >
                               Annuler

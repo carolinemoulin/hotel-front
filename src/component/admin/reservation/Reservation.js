@@ -81,7 +81,6 @@ class Reservation extends Component {
             <table className="table">
               <thead>
                 <tr>
-                  <th>ID</th>
                   <th>Catégorie</th>
                   <th>Date de début</th>
                   <th>Date de fin</th>
@@ -94,7 +93,6 @@ class Reservation extends Component {
                 {this.state.reservations.map((reservation) => {
                   return (
                     <tr key={reservation.id}>
-                      <td>{reservation.id}</td>
                       <td>{reservation.categoryId}</td>
                       <td>{reservation.startDate}</td>
                       <td>{reservation.endDate}</td>
