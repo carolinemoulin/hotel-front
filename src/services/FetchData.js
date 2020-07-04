@@ -57,26 +57,28 @@ class FetchData {
       });
   }
 
-  // deleteReservation = (code) => {
-  //   return fetch(`${this.url}booking/${code}`, {
-  //     credentials: this.credentials,
-  //     method: "DELETE",
-  //     headers: this.headers
-  //   }).then(function (response) {
-  //     if (response.status !== 200) {
-  //       throw new Error("Erreur " + response.status);
-  //     }
-  //     return response.json();// teste si c'est bien du json
-  //   })
-  //     .then(function (data) {
-  //       console.log('data : ', data);// J'ai ma donnée au format json
-  //       return data;
-  //     });
+  getAvailable = ({ start, end, persons }) => {
+    const query_string = `?start=${start}&end=${end}&persons=${persons}`;
+    return fetch(`${this.url}booking/available${query_string}`, {
+      credentials: this.credentials,
+      method: "GET",
+      headers: this.headers
+    }).then(function (response) {
+      if (response.status !== 200) {
+        throw new Error("Erreur " + response.status);
+      }
+      return response.json();// teste si c'est bien du json
+    })
+      .then(function (data) {
+        console.log('data : ', data);// J'ai ma donnée au format json
+        return data;
+      });
 
-  // }
+  }
+
   deleteReservation = (code) => {
     console.log('Dans deleteReservation, ', code);
-    return fetch(`${this.url}booking/${code}`, {
+    return fetch(`${this.url}/booking/available`, {
       method: "DELETE",
       headers: this.headers
     }

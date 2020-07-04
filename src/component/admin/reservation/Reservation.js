@@ -31,6 +31,26 @@ class Reservation extends Component {
     this.setState(copy_state);
   };
 
+  deleteReservation = async(e) => {
+    e.preventDefault();
+    console.log('Dans deleteReservation');
+    const code = e.target.getAttribute("data-code")
+    try {
+      const reservation = await this.fd.deleteReservation(code);
+      console.log('reservation :', reservation);
+       // copie du state
+      const copy_state = { ...this.state };
+      // modification de la copie du state
+      copy_state.reservations = copy_state.reservations.filter(reservation => {
+        return reservation.code !== code
+      });
+      // sauvegarde du state
+      this.setState(copy_state);
+      } catch (error) {
+        console.log('Erreur : ', error);
+      }   
+  }
+
   componentDidMount = async() => {
     try {
       const data = await this.fd.getReservations(); // il faut obligatoirement que getReservations retourne une promesse
@@ -67,6 +87,7 @@ class Reservation extends Component {
                   <th>Date de fin</th>
                   <th>Nombre de personnes</th>
                   <th>Nombre de nuits</th>
+                  <th>Annulation</th>
                 </tr>
               </thead>
               <tbody>
@@ -79,6 +100,7 @@ class Reservation extends Component {
                       <td>{reservation.endDate}</td>
                       <td>{reservation.data.persons}</td>
                       <td>{reservation.data.nights}</td>
+                      <td><button className="btn btn-primary" data-code={reservation.code} onClick={this.deleteReservation}>Annulation</button></td>
                     </tr>
                   );
                 })}

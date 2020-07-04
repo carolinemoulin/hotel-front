@@ -53,7 +53,7 @@ a:focus {
   padding: 15px;
   right: -15px;
   background-color: white;
-  box-shadow: 3px 3px 3px grey;
+  box-shadow: 3px 3px 3px B7BBBE;
   border-radius: 6px;  }
 #form-reservation {
   #start-date-label,#end-date-label{
@@ -75,12 +75,12 @@ a:focus {
         width: 50%;}
       }
 }
-  #form-reservation {
-    #submit-reservation {
-    z-index: 1;
-   }
-  }
-  #list-services {li {
-    margin: 10px 20px 0 0;
+#form-reservation {
+  #submit-reservation {
+    position: relative;
+  z-index: 1;}
+}
+#list-services {li {
+  margin: 10px 20px 0 0;
   }
 }
