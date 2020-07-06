@@ -78,8 +78,8 @@ class Reservation extends Component {
                 <p>Merci de contacter l'administrateur admin@hotel.com</p>
               </div>
             )}
-            <table className="table">
-              <thead>
+            <table className="table border">
+              <thead className="table-dark">
                 <tr>
                   <th>Catégorie</th>
                   <th>Date de début</th>

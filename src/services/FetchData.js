@@ -7,6 +7,44 @@ class FetchData {
     // };
     this.credentials = "same-origin";
   }
+
+  getCategories = () => {
+    return fetch(`${this.url}admin/categories`, {
+      credentials: this.credentials,
+      method: "GET",
+      headers: this.headers
+    }).then(function (response) {
+      if (response.status !== 200) {
+        throw new Error("Erreur " + response.status);
+      }
+      return response.json();// teste si c'est bien du json
+    })
+      .then(function (data) {
+        console.log('data : ', data);// J'ai ma donnée au format json
+        return data;
+      });
+
+  }
+
+  getPeriods = () => {
+    return fetch(`${this.url}admin/periods`, {
+      credentials: this.credentials,
+      method: "GET",
+      headers: this.header,
+    })
+      .then(function (response) {
+        if (response.status !== 200) {
+          throw new Error("Erreur" + response.json());
+        }
+        console.log("Dans le fetch de periods");
+        return response.json();
+      })
+      .then(function (data) {
+        console.log("dans le fetch get periods :" + data);
+        return data;
+      });
+  };
+
   getReservations = () => {
     return fetch(`${this.url}admin/reservations`, {
       credentials: this.credentials,
@@ -24,6 +62,26 @@ class FetchData {
       });
 
   }
+
+  getAvailable = ({ start, end, persons }) => {
+    const query_string = `?start=${start}&end=${end}&persons=${persons}`;
+    return fetch(`${this.url}booking/available${query_string}`, {
+      credentials: this.credentials,
+      method: "GET",
+      headers: this.headers
+    }).then(function (response) {
+      if (response.status !== 200) {
+        throw new Error("Erreur " + response.status);
+      }
+      return response.json();// teste si c'est bien du json
+    })
+      .then(function (data) {
+        console.log('data : ', data);// J'ai ma donnée au format json
+        return data;
+      });
+
+  }
+
   postReservation = ({ start, end, persons, category }) => {
     const query_string = `?start=${start}&end=${end}&persons=${persons}&category=${category}`;
     console.log('query_string : ', query_string);
@@ -55,25 +113,6 @@ class FetchData {
         console.log('data : ', data);// J'ai ma donnée au format json
         return data;
       });
-  }
-
-  getAvailable = ({ start, end, persons }) => {
-    const query_string = `?start=${start}&end=${end}&persons=${persons}`;
-    return fetch(`${this.url}booking/available${query_string}`, {
-      credentials: this.credentials,
-      method: "GET",
-      headers: this.headers
-    }).then(function (response) {
-      if (response.status !== 200) {
-        throw new Error("Erreur " + response.status);
-      }
-      return response.json();// teste si c'est bien du json
-    })
-      .then(function (data) {
-        console.log('data : ', data);// J'ai ma donnée au format json
-        return data;
-      });
-
   }
 
   deleteReservation = (code) => {
