@@ -104,15 +104,9 @@ class Home extends Component {
       console.log("Erreur : ", error);
     }
   };
-  render() {
+  formRender() {
     return (
-      <div className="App">
-        <Header path="/" />
-        <div className="container">
-          <div className="row headband">
-            <div className="col-md-8"></div>
-            <div className="col-md-4">
-              <div id="wrapper-form">
+<div id="wrapper-form">
                 <h2>Réservation</h2>
                 <Form
                   onSubmit={this.handleSearchAvailable}
@@ -165,6 +159,17 @@ class Home extends Component {
                   </Button>
                 </Form>
               </div>
+    )
+  }
+  render() {
+    return (
+      <div className="App">
+        <Header path="/" />
+        <div className="container">
+          <div className="row headband">
+            <div className="col-md-8"></div>
+            <div className="col-md-4">
+              {this.formRender()}
             </div>
           </div>
           <div className="row bg-primary">
