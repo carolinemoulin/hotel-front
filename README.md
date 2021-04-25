@@ -1,3 +1,5 @@
+Projet effectué dans le cadre d'une formation. A coupler avec l'api hotel-server.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
